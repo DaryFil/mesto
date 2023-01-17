@@ -1,7 +1,7 @@
 .card__description {
   display: flex;
   justify-content: space-between;
-  padding: 22px 20px 28px;
+  padding: 25px 20px;
 }
 @media screen and(max-width: 1023px) {
   .card__description {

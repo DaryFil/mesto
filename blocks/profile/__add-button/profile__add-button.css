@@ -9,8 +9,7 @@
   background-position: center;
   align-self: center;
   background-color: black;
-  box-sizing: content-box;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   justify-self: flex-end;
   border-radius: 2px;
 }
