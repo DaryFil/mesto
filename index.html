@@ -4,105 +4,130 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
-    <title>Места</title>
+    <title>Место</title>
   </head>
-  <body class="page">
-    <header class="header">
-      <img src="./images/logo.svg" alt="логотип место" class="header__logo" />
-    </header>
-    <main class="content">
-      <section class="profile">
-        <div class="profile__avatar-cont">
-          <img
-            src="./images/vasiliska.jpeg"
-            alt="фото кошки"
-            class="profile__avatar"
-          />
-        </div>
-        <div class="profile__info">
-          <div class="profile__title">
-            <h1 class="profile__name">Василиса Злo</h1>
-            <button type="button" class="profile__edit-button"></button>
+  <body class="body">
+    <div class="page">
+      <header class="header">
+        <img src="./images/logo.svg" alt="логотип место" class="header__logo" />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <div class="profile__avatar-cont">
+            <img
+              src="./images/vasiliska.jpg"
+              alt="фото кошки"
+              class="profile__avatar"
+            />
           </div>
-          <p class="profile__about">Похититель мелких предметов</p>
-        </div>
-        <button type="button" class="profile__add-button"></button>
-      </section>
+          <div class="profile__info">
+            <div class="profile__title">
+              <h1 class="profile__name">Василиса Злунина</h1>
+              <button
+                type="button"
+                class="profile__edit-button opacity"
+              ></button>
+            </div>
+            <p class="profile__about">Похититель мелких предметов</p>
+          </div>
+          <button type="button" class="profile__add-button opacity"></button>
+        </section>
 
-      <section class="elements">
-        <article class="card">
-          <img
-            src="./images/archipo-osipovka.jpeg"
-            alt="Архипо-Осиповка"
-            class="card__image"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Архипо-Осиповка</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            src="./images/bechteevka.jpeg"
-            alt="радуга в деревне"
-            class="card__image"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Бехтеевка</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            src="./images/grafskij zapovednik.jpeg"
-            alt="река в Графском заповеднике"
-            class="card__image"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Графское</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            src="./images/kudykina-gora-lipetskaya-obl.jpeg"
-            alt="Кудыкина гора"
-            class="card__image"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Кудыкина гора</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            src="./images/novorossijsk.jpeg"
-            alt="Новороссийск, вид на порт"
-            class="card__image"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Новороссийск</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            src="./images/safari-park-gelendjik.jpeg"
-            alt="канатная дорога в геленджике"
-            class="card__image"
-          />
-          <div class="card__description">
-            <h2 class="card__title">Геленджик</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__copyright">©2022 Mesto Russia</p>
-    </footer>
-    <div class="popup">
-      <div class="popup__container"></div>
+        <section class="elements">
+          <article class="card">
+            <img
+              src="./images/archipo-osipovka.jpg"
+              alt="Архипо-Осиповка"
+              class="card__image"
+            />
+            <div class="card__description">
+              <h2 class="card__title">Архипо-Осиповка</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              src="./images/bechteevka.jpg"
+              alt="радуга в деревне"
+              class="card__image"
+            />
+            <div class="card__description">
+              <h2 class="card__title">Бехтеевка</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              src="./images/grafskij-zapovednik.jpg"
+              alt="река в Графском заповеднике"
+              class="card__image"
+            />
+            <div class="card__description">
+              <h2 class="card__title">Графское</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              src="./images/kudykina-gora-lipetskaya-obl.jpg"
+              alt="Кудыкина гора"
+              class="card__image"
+            />
+            <div class="card__description">
+              <h2 class="card__title">Кудыкина гора</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              src="./images/novorossijsk.jpg"
+              alt="Новороссийск, вид на порт"
+              class="card__image"
+            />
+            <div class="card__description">
+              <h2 class="card__title">Новороссийск</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              src="./images/safari-park-gelendjik.jpg"
+              alt="канатная дорога в геленджике"
+              class="card__image"
+            />
+            <div class="card__description">
+              <h2 class="card__title">Геленджик</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">© 2023 Mesto Russia</p>
+      </footer>
+      <div class="popup">
+        <div class="popup__container">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__profile_form" name="profile">
+            <input
+              type="text"
+              placeholder="Имя"
+              class="popup__profile_name popup__input"
+              name="name"
+            />
+            <input
+              type="text"
+              placeholder="Специальность"
+              class="popup__profile_about popup__input"
+              name="job"
+            />
+            <button type="submit" class="popup__button_save opacity">
+              Сохранить
+            </button>
+          </form>
+        </div>
+        <button type="button" class="popup__button_close opacity"></button>
+      </div>
     </div>
     <script src="./scripts/index.js"></script>
   </body>
