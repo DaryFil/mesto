@@ -1,11 +1,11 @@
 const popup = document.querySelector(".popup"),
   btnOpen = document.querySelector(".profile__edit-button"),
-  btnClose = document.querySelector(".popup__button_close"),
+  btnClose = document.querySelector(".popup__button-close"),
   profileName = document.querySelector(".profile__name"),
   profileAbout = document.querySelector(".profile__about"),
-  inputName = document.querySelector(".popup__profile_name"),
-  inputAbout = document.querySelector(".popup__profile_about"),
-  popupForm = document.querySelector(".popup__profile_form");
+  inputName = document.querySelector(".popup__input-name"),
+  inputAbout = document.querySelector(".popup__input-about"),
+  popupForm = document.querySelector(".popup__profile-form");
 
 btnOpen.addEventListener("click", openPopup);
 btnClose.addEventListener("click", closePopup);
