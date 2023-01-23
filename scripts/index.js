@@ -3,13 +3,9 @@ const popup = document.querySelector(".popup"),
   btnClose = document.querySelector(".popup__button-close"),
   profileName = document.querySelector(".profile__name"),
   profileAbout = document.querySelector(".profile__about"),
-  inputName = document.querySelector(".popup__input-name"),
-  inputAbout = document.querySelector(".popup__input-about"),
+  inputName = document.querySelector(".popup__input_name"),
+  inputAbout = document.querySelector(".popup__input_about"),
   popupForm = document.querySelector(".popup__profile-form");
-
-btnOpen.addEventListener("click", openPopup);
-btnClose.addEventListener("click", closePopup);
-popupForm.addEventListener("submit", saveForm);
 
 function openPopup() {
   popup.classList.add("popup_opened");
@@ -27,3 +23,6 @@ function saveForm(evt) {
   profileAbout.textContent = inputAbout.value;
   closePopup();
 }
+btnOpen.addEventListener("click", openPopup);
+btnClose.addEventListener("click", closePopup);
+popupForm.addEventListener("submit", saveForm);

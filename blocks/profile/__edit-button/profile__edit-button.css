@@ -4,6 +4,7 @@
   box-shadow: none;
   width: 24px;
   height: 24px;
+  aspect-ratio: 1 / 1;
   background-image: url(../../../images/pencil.svg);
   background-repeat: no-repeat;
   background-position: center;

@@ -1,6 +1,7 @@
 .popup__button-close {
   width: 32px;
   height: 32px;
+  aspect-ratio: 1 / 1;
   background-image: url(../../../images/Close.svg);
   background-color: transparent;
   background-position: center;
