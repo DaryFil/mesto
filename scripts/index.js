@@ -12,7 +12,10 @@ const popupProfile = document.querySelector(".popup_profile"),
   btnOpenPopupAdd = document.querySelector(".profile__add-button"),
   formPopupAdd = document.querySelector(".popup__profile-form_card"),
   inputPlace = document.querySelector(".popup__input_place"),
-  inputLink = document.querySelector(".popup__input_link");
+  inputLink = document.querySelector(".popup__input_link"),
+  popupPhotoView = document.querySelector(".popup_photo-view"),
+  popupImage = document.querySelector(".popup__image"),
+  popupImageTitle = document.querySelector(".popup__image-title");
 
 initialCards = [
   {
@@ -67,19 +70,28 @@ function deleteCard(evt) {
   evt.target.closest(".card").remove();
 }
 
+function handleImageView(evt) {
+  popupImage.src = evt.target.src;
+  popupImage.alt = evt.target.alt;
+  popupImageTitle.textContent = evt.target.alt;
+  openPopup(popupPhotoView);
+}
+
 function createCard(name, link) {
   const card = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = card.querySelector(".card__title");
   const cardImage = card.querySelector(".card__image");
-
   const cardLikebtn = card.querySelector(".card__like");
   const cardDeletebtn = card.querySelector(".card__delete-button");
 
   cardTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
+
   cardLikebtn.addEventListener("click", toggleLike);
   cardDeletebtn.addEventListener("click", deleteCard);
+  cardImage.addEventListener("click", handleImageView);
+
   return card;
 }
 
