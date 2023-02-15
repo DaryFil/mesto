@@ -32,80 +32,24 @@
           </div>
           <button type="button" class="profile__add-button opacity"></button>
         </section>
-
         <section class="elements">
-          <article class="card">
-            <img
-              src="./images/archipo-osipovka.jpg"
-              alt="Архипо-Осиповка"
-              class="card__image"
-            />
-            <div class="card__description">
-              <h2 class="card__title">Архипо-Осиповка</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/bechteevka.jpg"
-              alt="радуга в деревне"
-              class="card__image"
-            />
-            <div class="card__description">
-              <h2 class="card__title">Бехтеевка</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/grafskij-zapovednik.jpg"
-              alt="река в Графском заповеднике"
-              class="card__image"
-            />
-            <div class="card__description">
-              <h2 class="card__title">Графское</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/kudykina-gora-lipetskaya-obl.jpg"
-              alt="Кудыкина гора"
-              class="card__image"
-            />
-            <div class="card__description">
-              <h2 class="card__title">Кудыкина гора</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/novorossijsk.jpg"
-              alt="Новороссийск, вид на порт"
-              class="card__image"
-            />
-            <div class="card__description">
-              <h2 class="card__title">Новороссийск</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/safari-park-gelendjik.jpg"
-              alt="канатная дорога в геленджике"
-              class="card__image"
-            />
-            <div class="card__description">
-              <h2 class="card__title">Геленджик</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </article>
+          <template id="card">
+            <article class="card">
+              <img class="card__image" />
+              <button class="card__delete-button opacity"></button>
+              <div class="card__description">
+                <h2 class="card__title"></h2>
+                <button type="button" class="card__like"></button>
+              </div>
+            </article>
+          </template>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2023 Mesto Russia</p>
       </footer>
-      <div class="popup">
+
+      <div class="popup popup_profile">
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
           <form class="popup__profile-form" name="profile">
@@ -126,6 +70,36 @@
             </button>
           </form>
           <button type="button" class="popup__button-close opacity"></button>
+        </div>
+      </div>
+
+      <div class="popup popup_add-card">
+        <div class="popup__container">
+          <h2 class="popup__title">Новое место</h2>
+          <form
+            class="popup__profile-form popup__profile-form_card"
+            name="card"
+          >
+            <input
+              type="text"
+              placeholder="Название"
+              class="popup__input popup__input_place"
+              name="place"
+            />
+            <input
+              type="url"
+              placeholder="Ссылка на картинку"
+              class="popup__input popup__input_link"
+              name="link"
+            />
+            <button type="submit" class="popup__button-save opacity">
+              Создать
+            </button>
+          </form>
+          <button
+            type="button"
+            class="popup__button-close popup__button-close_add-card opacity"
+          ></button>
         </div>
       </div>
     </div>

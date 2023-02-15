@@ -14,6 +14,3 @@
 .card__like:hover {
   background-image: url(../../../images/heart-hover.svg);
 }
-.card__like:active {
-  background-image: url(../../../images/active-heart.svg);
-}
