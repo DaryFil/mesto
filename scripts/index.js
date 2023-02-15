@@ -15,34 +15,33 @@ const popupProfile = document.querySelector(".popup_profile"),
   inputLink = document.querySelector(".popup__input_link"),
   popupPhotoView = document.querySelector(".popup_photo-view"),
   popupImage = document.querySelector(".popup__image"),
-  popupImageTitle = document.querySelector(".popup__image-title");
-
-initialCards = [
-  {
-    name: "Архипо-Осиповка",
-    link: "https://i.ibb.co/3SDtYjd/archipo-osipovka.jpg",
-  },
-  {
-    name: "Бехтеевка",
-    link: "https://i.ibb.co/ZBd1343/bechteevka.jpg",
-  },
-  {
-    name: "Графский заповедник",
-    link: "https://i.ibb.co/zP14PC3/grafskij-zapovednik.jpg",
-  },
-  {
-    name: "Кудыкина гора",
-    link: "https://i.ibb.co/Mhpfy9g/kudykina-gora-lipetskaya-obl.jpg",
-  },
-  {
-    name: "Новороссийск",
-    link: "https://i.ibb.co/KzhMcbp/novorossijsk.jpg",
-  },
-  {
-    name: "Сафари-парк, Геленджик",
-    link: "https://i.ibb.co/Hxf96kK/safari-park-gelendjik.jpg",
-  },
-];
+  popupImageTitle = document.querySelector(".popup__image-title"),
+  initialCards = [
+    {
+      name: "Архипо-Осиповка",
+      link: "https://i.ibb.co/3SDtYjd/archipo-osipovka.jpg",
+    },
+    {
+      name: "Бехтеевка",
+      link: "https://i.ibb.co/ZBd1343/bechteevka.jpg",
+    },
+    {
+      name: "Графский заповедник",
+      link: "https://i.ibb.co/zP14PC3/grafskij-zapovednik.jpg",
+    },
+    {
+      name: "Кудыкина гора",
+      link: "https://i.ibb.co/Mhpfy9g/kudykina-gora-lipetskaya-obl.jpg",
+    },
+    {
+      name: "Новороссийск",
+      link: "https://i.ibb.co/KzhMcbp/novorossijsk.jpg",
+    },
+    {
+      name: "Сафари-парк, Геленджик",
+      link: "https://i.ibb.co/Hxf96kK/safari-park-gelendjik.jpg",
+    },
+  ];
 function openPopup(popup) {
   popup.classList.add("popup_opened");
 }
@@ -106,6 +105,7 @@ function handleSubmitPopupAdd(evt) {
   evt.preventDefault();
   renderCard(createCard(inputPlace.value, inputLink.value), cardsContainer);
   closePopup(popupAdd);
+  evt.target.reset();
 }
 btnOpen.addEventListener("click", openPopupProfile);
 
