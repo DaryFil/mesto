@@ -12,5 +12,5 @@
   width: 22px;
 }
 .card__like:hover {
-  background-image: url(../../../images/heart-hover.svg);
+  opacity: 0.5;
 }
