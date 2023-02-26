@@ -10,6 +10,11 @@
   height: 50px;
   border-radius: 2px;
 }
+.popup__button-save:disabled {
+  color: #000;
+  background-color: transparent;
+  opacity: 0.2;
+}
 @media screen and (max-width: 767px) {
   .popup__button-save {
     font-size: 14px;

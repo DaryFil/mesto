@@ -6,6 +6,7 @@ const popupProfile = document.querySelector(".popup_profile"),
   inputName = document.querySelector(".popup__input_name"),
   inputAbout = document.querySelector(".popup__input_about"),
   popupForm = document.querySelector(".popup__profile-form"),
+  popupProfileSavebtn = popupForm.querySelector(".popup__button-save"),
   cardTemplate = document.querySelector("#card").content,
   cardsContainer = document.querySelector(".elements"),
   popupAdd = document.querySelector(".popup_add-card"),
@@ -16,6 +17,14 @@ const popupProfile = document.querySelector(".popup_profile"),
   popupPhotoView = document.querySelector(".popup_photo-view"),
   popupImage = document.querySelector(".popup__image"),
   popupImageTitle = document.querySelector(".popup__image-title"),
+  // validationConfig = {
+  //   formSelector,
+  //   inputSelector,
+  //   submitButtonSelector,
+  //   inactiveButtonClass,
+  //   inputErrorClass,
+  //   errorClass,
+  // },
   initialCards = [
     {
       name: "Архипо-Осиповка",
@@ -53,6 +62,9 @@ function openPopupProfile() {
   openPopup(popupProfile);
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
+  // resetValidation(popupForm, validationConfig);
+  const inputList = form.querySelectorAll(inputSelector);
+  toggleButtonState(inputList, button);
 }
 
 function saveForm(evt) {
@@ -116,4 +128,14 @@ popupCloseButtons.forEach((button) => {
 });
 popupForm.addEventListener("submit", saveForm);
 formPopupAdd.addEventListener("submit", handleSubmitPopupAdd);
-btnOpenPopupAdd.addEventListener("click", () => openPopup(popupAdd));
+btnOpenPopupAdd.addEventListener("click", () => {
+  // resetValidation(formPopupAdd, validationConfig);
+  openPopup(popupAdd);
+});
+
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button-save",
+  inputErrorClass: "popup__input_type_error",
+});
