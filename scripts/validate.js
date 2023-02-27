@@ -55,8 +55,17 @@ const toggleButtonState = (inputList, button) => {
 const hasInvalidInput = (inputList) => {
   return Array.from(inputList).some((input) => !input.validity.valid);
 };
-// const resetValidation = (form, object) => {
-//   const inputList = form.querySelectorAll(inputSelector);
+// const resetValidation = (
+//   form,
+//   {
+//     inputSelector,
+//     submitButtonSelector,
+//     inactiveButtonClass,
+//     inputErrorClass,
+//     errorClass,
+//   }
+// ) => {
+//   const inputList = Array.from(form.querySelectorAll(inputSelector));
 //   const button = form.querySelector(submitButtonSelector);
 //   toggleButtonState(inputList, button);
 //   inputList.forEach((input) => {

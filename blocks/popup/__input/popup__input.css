@@ -6,8 +6,8 @@
   border: none;
   outline: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 3px;
+  padding-bottom: 9px;
 }
-.popup__input:first-child {
+/* .popup__input:first-child {
   margin-bottom: 25px;
-}
+} */

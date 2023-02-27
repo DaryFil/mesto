@@ -18,12 +18,12 @@ const popupProfile = document.querySelector(".popup_profile"),
   popupImage = document.querySelector(".popup__image"),
   popupImageTitle = document.querySelector(".popup__image-title"),
   // validationConfig = {
-  //   formSelector,
-  //   inputSelector,
-  //   submitButtonSelector,
-  //   inactiveButtonClass,
-  //   inputErrorClass,
-  //   errorClass,
+  //   formSelector: ".popup__form",
+  //   inputSelector: ".popup__input",
+  //   submitButtonSelector: ".popup__submit-btn",
+  //   inactiveButtonClass: "popup__submit-btn_disabled",
+  //   inputErrorClass: "popup__input_type_error",
+  //   errorClass: "popup__input-error_visible",
   // },
   initialCards = [
     {
@@ -62,9 +62,11 @@ function openPopupProfile() {
   openPopup(popupProfile);
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  // resetValidation(popupForm, validationConfig);
-  const inputList = form.querySelectorAll(inputSelector);
+
+  // const inputList = form.querySelectorAll(inputSelector);
   toggleButtonState(inputList, button);
+
+  // resetValidation(popupForm, validationConfig);
 }
 
 function saveForm(evt) {
