@@ -18,14 +18,6 @@ const popupProfile = document.querySelector(".popup_profile"),
   popupPhotoView = document.querySelector(".popup_photo-view"),
   popupImage = document.querySelector(".popup__image"),
   popupImageTitle = document.querySelector(".popup__image-title"),
-  validationConfig = {
-    formSelector: ".popup__form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__button-save",
-    inactiveButtonClass: "popup__button-save_disabled",
-    inputErrorClass: "popup__input_type_error",
-    errorClass: "popup__input-error_visible",
-  },
   initialCards = [
     {
       name: "Архипо-Осиповка",
