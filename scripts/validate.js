@@ -1,4 +1,4 @@
-validationConfig = {
+const validationConfig = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save",
@@ -10,11 +10,11 @@ validationConfig = {
 const showInputError = (
   form,
   input,
-  errorMessage,
+  inputErrorClass,
   errorClass,
-  inputErrorClass
+  errorMessage
 ) => {
-  const errorElement = form.querySelector(`.${input.name}-error`); //элемент в который выводим ошибку(спан)
+  const errorElement = form.querySelector(`.${input.name}-error`);
   input.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
@@ -75,13 +75,7 @@ const resetValidation = (
 
 const addFormValidation = (
   form,
-  {
-    inputSelector,
-    submitButtonSelector,
-    
-    inactiveButtonClass,
-    ...rest
-  }
+  { inputSelector, submitButtonSelector, inactiveButtonClass, ...rest }
 ) => {
   const inputList = Array.from(form.querySelectorAll(inputSelector));
   const button = form.querySelector(submitButtonSelector);
@@ -95,20 +89,13 @@ const addFormValidation = (
       toggleButtonState(inputList, button, inactiveButtonClass);
     });
   });
- };
-
+};
 
 const enableValidation = ({ formSelector, ...rest }) => {
   const forms = document.querySelectorAll(formSelector);
 
   forms.forEach((form) => {
-    addFormValidation(form, rest );
+    addFormValidation(form, rest);
   });
 };
 enableValidation(validationConfig);
-
-
-
-
-
-
