@@ -1,4 +1,5 @@
 const popupProfile = document.querySelector(".popup_profile"),
+  popups = document.querySelectorAll(".popup"),
   btnOpen = document.querySelector(".profile__edit-button"),
   popupCloseButtons = document.querySelectorAll(".popup__button-close"),
   profileName = document.querySelector(".profile__name"),
@@ -17,14 +18,14 @@ const popupProfile = document.querySelector(".popup_profile"),
   popupPhotoView = document.querySelector(".popup_photo-view"),
   popupImage = document.querySelector(".popup__image"),
   popupImageTitle = document.querySelector(".popup__image-title"),
-  // validationConfig = {
-  //   formSelector: ".popup__form",
-  //   inputSelector: ".popup__input",
-  //   submitButtonSelector: ".popup__submit-btn",
-  //   inactiveButtonClass: "popup__submit-btn_disabled",
-  //   inputErrorClass: "popup__input_type_error",
-  //   errorClass: "popup__input-error_visible",
-  // },
+  validationConfig = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button-save",
+    inactiveButtonClass: "popup__button-save_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__input-error_visible",
+  },
   initialCards = [
     {
       name: "Архипо-Осиповка",
@@ -51,22 +52,39 @@ const popupProfile = document.querySelector(".popup_profile"),
       link: "https://i.ibb.co/Hxf96kK/safari-park-gelendjik.jpg",
     },
   ];
-function openPopup(popup) {
+
+const handleCloseEsc = (evt) => {
+  if (evt.key === "Escape") {
+    const currentPopup = document.querySelector(".popup_opened");
+    closePopup(currentPopup);
+  }
+};
+
+const openPopup = (popup) => {
   popup.classList.add("popup_opened");
-}
-function closePopup(popup) {
+  document.addEventListener("keydown", handleCloseEsc);
+};
+
+const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
-}
+  document.removeEventListener("keydown", handleCloseEsc);
+};
+
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    } else if (evt.target.classList.contains("popup__button-close")) {
+      closePopup(popup);
+    }
+  });
+});
 
 function openPopupProfile() {
-  openPopup(popupProfile);
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-
-  // const inputList = form.querySelectorAll(inputSelector);
-  toggleButtonState(inputList, button);
-
-  // resetValidation(popupForm, validationConfig);
+  resetValidation(popupForm, validationConfig);
+  openPopup(popupProfile);
 }
 
 function saveForm(evt) {
@@ -75,6 +93,7 @@ function saveForm(evt) {
   profileAbout.textContent = inputAbout.value;
   closePopup(popupProfile);
 }
+
 function toggleLike(evt) {
   evt.target.classList.toggle("card__like_active");
 }
@@ -131,13 +150,6 @@ popupCloseButtons.forEach((button) => {
 popupForm.addEventListener("submit", saveForm);
 formPopupAdd.addEventListener("submit", handleSubmitPopupAdd);
 btnOpenPopupAdd.addEventListener("click", () => {
-  // resetValidation(formPopupAdd, validationConfig);
+  resetValidation(formPopupAdd, validationConfig);
   openPopup(popupAdd);
-});
-
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button-save",
-  inputErrorClass: "popup__input_type_error",
 });

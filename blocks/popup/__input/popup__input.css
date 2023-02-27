@@ -1,5 +1,4 @@
 .popup__input {
-  min-height: 27px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -8,6 +7,3 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 9px;
 }
-/* .popup__input:first-child {
-  margin-bottom: 25px;
-} */
