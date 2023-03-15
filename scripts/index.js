@@ -1,49 +1,4 @@
-const popupProfile = document.querySelector(".popup_profile"),
-  popups = document.querySelectorAll(".popup"),
-  btnOpen = document.querySelector(".profile__edit-button"),
-  popupCloseButtons = document.querySelectorAll(".popup__button-close"),
-  profileName = document.querySelector(".profile__name"),
-  profileAbout = document.querySelector(".profile__about"),
-  inputName = document.querySelector(".popup__input_name"),
-  inputAbout = document.querySelector(".popup__input_about"),
-  popupForm = document.querySelector(".popup__profile-form"),
-  popupProfileSavebtn = popupForm.querySelector(".popup__button-save"),
-  cardTemplate = document.querySelector("#card").content,
-  cardsContainer = document.querySelector(".elements"),
-  popupAdd = document.querySelector(".popup_add-card"),
-  btnOpenPopupAdd = document.querySelector(".profile__add-button"),
-  formPopupAdd = document.querySelector(".popup__profile-form_card"),
-  inputPlace = document.querySelector(".popup__input_place"),
-  inputLink = document.querySelector(".popup__input_link"),
-  popupPhotoView = document.querySelector(".popup_photo-view"),
-  popupImage = document.querySelector(".popup__image"),
-  popupImageTitle = document.querySelector(".popup__image-title"),
-  initialCards = [
-    {
-      name: "Архипо-Осиповка",
-      link: "https://i.ibb.co/3SDtYjd/archipo-osipovka.jpg",
-    },
-    {
-      name: "Бехтеевка",
-      link: "https://i.ibb.co/ZBd1343/bechteevka.jpg",
-    },
-    {
-      name: "Графский заповедник",
-      link: "https://i.ibb.co/zP14PC3/grafskij-zapovednik.jpg",
-    },
-    {
-      name: "Кудыкина гора",
-      link: "https://i.ibb.co/Mhpfy9g/kudykina-gora-lipetskaya-obl.jpg",
-    },
-    {
-      name: "Новороссийск",
-      link: "https://i.ibb.co/KzhMcbp/novorossijsk.jpg",
-    },
-    {
-      name: "Сафари-парк, Геленджик",
-      link: "https://i.ibb.co/Hxf96kK/safari-park-gelendjik.jpg",
-    },
-  ];
+import { Card } from "./Card.js";
 
 const handleCloseEsc = (evt) => {
   if (evt.key === "Escape") {
@@ -86,49 +41,57 @@ function saveForm(evt) {
   closePopup(popupProfile);
 }
 
-function toggleLike(evt) {
-  evt.target.classList.toggle("card__like_active");
-}
+// function toggleLike(evt) {
+//   evt.target.classList.toggle("card__like_active");
+// }
 
-function deleteCard(evt) {
-  evt.target.closest(".card").remove();
-}
+// function deleteCard(evt) {
+//   evt.target.closest(".card").remove();
+// }
 
-function handleImageView(evt) {
+function handleImageView(cardImage) {
   popupImage.src = evt.target.src;
   popupImage.alt = evt.target.alt;
-  popupImageTitle.textContent = evt.target.alt;
+  popupImageTitle.textContent = cardImage.alt;
   openPopup(popupPhotoView);
 }
 
-function createCard(name, link) {
-  const card = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardTitle = card.querySelector(".card__title");
-  const cardImage = card.querySelector(".card__image");
-  const cardLikebtn = card.querySelector(".card__like");
-  const cardDeletebtn = card.querySelector(".card__delete-button");
+// function createCard(name, link) {
+//   const card = cardTemplate.querySelector(".card").cloneNode(true);
+//   const cardTitle = card.querySelector(".card__title");
+//   const cardImage = card.querySelector(".card__image");
+//   const cardLikebtn = card.querySelector(".card__like");
+//   const cardDeletebtn = card.querySelector(".card__delete-button");
 
-  cardTitle.textContent = name;
-  cardImage.src = link;
-  cardImage.alt = name;
+//   cardTitle.textContent = name;
+//   cardImage.src = link;
+//   cardImage.alt = name;
 
-  cardLikebtn.addEventListener("click", toggleLike);
-  cardDeletebtn.addEventListener("click", deleteCard);
-  cardImage.addEventListener("click", handleImageView);
+//   cardLikebtn.addEventListener("click", toggleLike);
+//   cardDeletebtn.addEventListener("click", deleteCard);
+//   cardImage.addEventListener("click", handleImageView);
 
-  return card;
+//   return card;
+// }
+
+function renderCard(cardData) {
+  const card = new Card(cardData, cardTemplate, handleImageView); //создаем новый экземпляр класса на основе класса кард
+  const cardElement = card.createCard(); //реальную карточку помещаем в переменную
+  cardsContainer.prepend(cardElement); //реальную карточку помещаем в начало контейнера
 }
 
-function renderCard(card, container) {
-  container.prepend(card);
-}
-initialCards.forEach((card) => {
-  renderCard(createCard(card.name, card.link), cardsContainer);
+initialCards.forEach((cardData) => {
+  //для каждого объекта массива
+  renderCard(cardData);
 });
 
 function handleSubmitPopupAdd(evt) {
   evt.preventDefault();
-  renderCard(createCard(inputPlace.value, inputLink.value), cardsContainer);
+  const cardData = {
+    name: inputPlace.value,
+    link: inputLink.value,
+  };
+  renderCard(cardData);
   closePopup(popupAdd);
   evt.target.reset();
 }

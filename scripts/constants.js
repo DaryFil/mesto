@@ -1,0 +1,46 @@
+const popupProfile = document.querySelector(".popup_profile"),
+  popups = document.querySelectorAll(".popup"),
+  btnOpen = document.querySelector(".profile__edit-button"),
+  popupCloseButtons = document.querySelectorAll(".popup__button-close"),
+  profileName = document.querySelector(".profile__name"),
+  profileAbout = document.querySelector(".profile__about"),
+  inputName = document.querySelector(".popup__input_name"),
+  inputAbout = document.querySelector(".popup__input_about"),
+  popupForm = document.querySelector(".popup__profile-form"),
+  popupProfileSavebtn = popupForm.querySelector(".popup__button-save"),
+  cardTemplate = document.querySelector("#card").content,
+  cardsContainer = document.querySelector(".elements"),
+  popupAdd = document.querySelector(".popup_add-card"),
+  btnOpenPopupAdd = document.querySelector(".profile__add-button"),
+  formPopupAdd = document.querySelector(".popup__profile-form_card"),
+  inputPlace = document.querySelector(".popup__input_place"),
+  inputLink = document.querySelector(".popup__input_link"),
+  popupPhotoView = document.querySelector(".popup_photo-view"),
+  popupImage = document.querySelector(".popup__image"),
+  popupImageTitle = document.querySelector(".popup__image-title"),
+  initialCards = [
+    {
+      name: "Архипо-Осиповка",
+      link: "https://i.ibb.co/3SDtYjd/archipo-osipovka.jpg",
+    },
+    {
+      name: "Бехтеевка",
+      link: "https://i.ibb.co/ZBd1343/bechteevka.jpg",
+    },
+    {
+      name: "Графский заповедник",
+      link: "https://i.ibb.co/zP14PC3/grafskij-zapovednik.jpg",
+    },
+    {
+      name: "Кудыкина гора",
+      link: "https://i.ibb.co/Mhpfy9g/kudykina-gora-lipetskaya-obl.jpg",
+    },
+    {
+      name: "Новороссийск",
+      link: "https://i.ibb.co/KzhMcbp/novorossijsk.jpg",
+    },
+    {
+      name: "Сафари-парк, Геленджик",
+      link: "https://i.ibb.co/Hxf96kK/safari-park-gelendjik.jpg",
+    },
+  ];
