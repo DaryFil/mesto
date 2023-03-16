@@ -58,8 +58,8 @@ formPopupFormValidator.enableValidation(); //для формы вызываем 
 formPopupAddValidator.enableValidation(); // для формы вызываем публичный метод
 
 const openPopupProfile = () => {
-  popupForm.inputName.value = profileName.textContent;
-  popupForm.inputAbout.value = profileAbout.textContent;
+  inputName.value = profileName.textContent;
+ inputAbout.value = profileAbout.textContent;
   formPopupFormValidator.resetValidation();
   openPopup(popupProfile);
 };
@@ -69,14 +69,6 @@ function saveForm() {
   profileAbout.textContent = inputAbout.value;
   closePopup(popupProfile);
 }
-
-// function toggleLike(evt) {
-//   evt.target.classList.toggle("card__like_active");
-// }
-
-// function deleteCard(evt) {
-//   evt.target.closest(".card").remove();
-// }
 
 function handleImageView(cardImage) {
   popupImage.src = cardImage.src;
