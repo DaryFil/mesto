@@ -10,7 +10,6 @@ import {
   inputName,
   inputAbout,
   popupForm,
-  popupProfileSavebtn,
   cardTemplate,
   cardsContainer,
   popupAdd,
@@ -59,7 +58,7 @@ formPopupAddValidator.enableValidation(); // для формы вызываем 
 
 const openPopupProfile = () => {
   inputName.value = profileName.textContent;
- inputAbout.value = profileAbout.textContent;
+  inputAbout.value = profileAbout.textContent;
   formPopupFormValidator.resetValidation();
   openPopup(popupProfile);
 };
@@ -76,24 +75,6 @@ function handleImageView(cardImage) {
   popupImageTitle.textContent = cardImage.alt;
   openPopup(popupPhotoView);
 }
-
-// function createCard(name, link) {
-//   const card = cardTemplate.querySelector(".card").cloneNode(true);
-//   const cardTitle = card.querySelector(".card__title");
-//   const cardImage = card.querySelector(".card__image");
-//   const cardLikebtn = card.querySelector(".card__like");
-//   const cardDeletebtn = card.querySelector(".card__delete-button");
-
-//   cardTitle.textContent = name;
-//   cardImage.src = link;
-//   cardImage.alt = name;
-
-//   cardLikebtn.addEventListener("click", toggleLike);
-//   cardDeletebtn.addEventListener("click", deleteCard);
-//   cardImage.addEventListener("click", handleImageView);
-
-//   return card;
-// }
 
 function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageView); //создаем новый экземпляр класса на основе класса кард
