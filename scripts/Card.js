@@ -10,11 +10,11 @@ export class Card {
      return this._templateSelector.querySelector('.card').cloneNode(true);
      }
 
-      _toggleLike = () => {
+    _toggleLike = () => {
         this._cardLikebtn.classList.toggle("card__like_active");
       }
       
-      _deleteCard = () => {
+    _deleteCard = () => {
         this._card.remove();
       }
 

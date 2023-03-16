@@ -1,4 +1,29 @@
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+import {
+  popupProfile,
+  popups,
+  btnOpen,
+  popupCloseButtons,
+  profileName,
+  profileAbout,
+  inputName,
+  inputAbout,
+  popupForm,
+  popupProfileSavebtn,
+  cardTemplate,
+  cardsContainer,
+  popupAdd,
+  btnOpenPopupAdd,
+  formPopupAdd,
+  inputPlace,
+  inputLink,
+  popupPhotoView,
+  popupImage,
+  popupImageTitle,
+  initialCards,
+  validationConfig,
+} from "./constants.js";
 
 const handleCloseEsc = (evt) => {
   if (evt.key === "Escape") {
@@ -27,15 +52,19 @@ popups.forEach((popup) => {
   });
 });
 
-function openPopupProfile() {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-  resetValidation(popupForm, validationConfig);
-  openPopup(popupProfile);
-}
+const formPopupFormValidator = new FormValidator(validationConfig, popupForm); //создаем новый экземпляр класса на основе класса формвалидатор
+const formPopupAddValidator = new FormValidator(validationConfig, popupAdd); //создаем новый экземпляр класса на основе класса формвалидатор
+formPopupFormValidator.enableValidation(); //для формы вызываем публичный метод
+formPopupAddValidator.enableValidation(); // для формы вызываем публичный метод
 
-function saveForm(evt) {
-  evt.preventDefault();
+const openPopupProfile = () => {
+  popupForm.inputName.value = profileName.textContent;
+  popupForm.inputAbout.value = profileAbout.textContent;
+  formPopupFormValidator.resetValidation();
+  openPopup(popupProfile);
+};
+
+function saveForm() {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   closePopup(popupProfile);
@@ -50,8 +79,8 @@ function saveForm(evt) {
 // }
 
 function handleImageView(cardImage) {
-  popupImage.src = evt.target.src;
-  popupImage.alt = evt.target.alt;
+  popupImage.src = cardImage.src;
+  popupImage.alt = cardImage.alt;
   popupImageTitle.textContent = cardImage.alt;
   openPopup(popupPhotoView);
 }
@@ -81,12 +110,11 @@ function renderCard(cardData) {
 }
 
 initialCards.forEach((cardData) => {
-  //для каждого объекта массива
+  //для каждого объекта массива функцией rendercard создаем карточку и перемещаем ее в начало контейнера с карточками
   renderCard(cardData);
 });
 
 function handleSubmitPopupAdd(evt) {
-  evt.preventDefault();
   const cardData = {
     name: inputPlace.value,
     link: inputLink.value,
@@ -95,6 +123,7 @@ function handleSubmitPopupAdd(evt) {
   closePopup(popupAdd);
   evt.target.reset();
 }
+
 btnOpen.addEventListener("click", openPopupProfile);
 
 popupCloseButtons.forEach((button) => {
@@ -105,6 +134,6 @@ popupCloseButtons.forEach((button) => {
 popupForm.addEventListener("submit", saveForm);
 formPopupAdd.addEventListener("submit", handleSubmitPopupAdd);
 btnOpenPopupAdd.addEventListener("click", () => {
-  resetValidation(formPopupAdd, validationConfig);
+  formPopupAddValidator.resetValidation();
   openPopup(popupAdd);
 });

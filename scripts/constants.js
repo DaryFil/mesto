@@ -1,4 +1,4 @@
-const popupProfile = document.querySelector(".popup_profile"),
+export const popupProfile = document.querySelector(".popup_profile"),
   popups = document.querySelectorAll(".popup"),
   btnOpen = document.querySelector(".profile__edit-button"),
   popupCloseButtons = document.querySelectorAll(".popup__button-close"),
@@ -43,4 +43,11 @@ const popupProfile = document.querySelector(".popup_profile"),
       name: "Сафари-парк, Геленджик",
       link: "https://i.ibb.co/Hxf96kK/safari-park-gelendjik.jpg",
     },
-  ];
+  ],
+  validationConfig = {
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button-save",
+    inactiveButtonClass: "popup__button-save_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__input-error_visible",
+  };
