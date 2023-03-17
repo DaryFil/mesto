@@ -3,13 +3,13 @@ import { FormValidator } from "./FormValidator.js";
 import {
   popupProfile,
   popups,
-  btnOpen,
+  profileOpenBtn,
   popupCloseButtons,
   profileName,
   profileAbout,
   inputName,
   inputAbout,
-  popupForm,
+  profileForm,
   cardTemplate,
   cardsContainer,
   popupAdd,
@@ -51,19 +51,22 @@ popups.forEach((popup) => {
   });
 });
 
-const formPopupFormValidator = new FormValidator(validationConfig, popupForm); //создаем новый экземпляр класса на основе класса формвалидатор
+const formProfileFormValidator = new FormValidator(
+  validationConfig,
+  profileForm
+); //создаем новый экземпляр класса на основе класса формвалидатор
 const formPopupAddValidator = new FormValidator(validationConfig, popupAdd); //создаем новый экземпляр класса на основе класса формвалидатор
-formPopupFormValidator.enableValidation(); //для формы вызываем публичный метод
+formProfileFormValidator.enableValidation(); //для формы вызываем публичный метод
 formPopupAddValidator.enableValidation(); // для формы вызываем публичный метод
 
 const openPopupProfile = () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  formPopupFormValidator.resetValidation();
+  formProfileFormValidator.resetValidation();
   openPopup(popupProfile);
 };
 
-function saveForm() {
+function handleProfileFormSubmit() {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   closePopup(popupProfile);
@@ -76,10 +79,15 @@ function handleImageView(cardImage) {
   openPopup(popupPhotoView);
 }
 
-function renderCard(cardData) {
+
+function createCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageView); //создаем новый экземпляр класса на основе класса кард
-  const cardElement = card.createCard(); //реальную карточку помещаем в переменную
-  cardsContainer.prepend(cardElement); //реальную карточку помещаем в начало контейнера
+  return card.generateCard();   //возвращаем сгенерированную карточку
+}
+
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
+  cardsContainer.prepend(cardElement);   //реальную карточку помещаем в начало контейнера
 }
 
 initialCards.forEach((cardData) => {
@@ -97,16 +105,17 @@ function handleSubmitPopupAdd(evt) {
   evt.target.reset();
 }
 
-btnOpen.addEventListener("click", openPopupProfile);
+profileOpenBtn.addEventListener("click", openPopupProfile);
 
 popupCloseButtons.forEach((button) => {
   button.addEventListener("click", (event) =>
     closePopup(event.target.closest(".popup"))
   );
 });
-popupForm.addEventListener("submit", saveForm);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
 formPopupAdd.addEventListener("submit", handleSubmitPopupAdd);
 btnOpenPopupAdd.addEventListener("click", () => {
+  formPopupAdd.reset();
   formPopupAddValidator.resetValidation();
   openPopup(popupAdd);
 });

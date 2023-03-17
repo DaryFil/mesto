@@ -30,7 +30,7 @@ export class Card {
     });
   };
 
-  createCard = () => {
+  generateCard = () => {
     this._card = this._getTemplate();
     this._cardTitle = this._card.querySelector(".card__title");
     this._cardImage = this._card.querySelector(".card__image");
