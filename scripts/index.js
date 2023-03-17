@@ -9,12 +9,12 @@ import {
   profileAbout,
   inputName,
   inputAbout,
-  profileForm,
+  formEditProfile,
   cardTemplate,
   cardsContainer,
   popupAdd,
   btnOpenPopupAdd,
-  formPopupAdd,
+  formAddCard,
   inputPlace,
   inputLink,
   popupPhotoView,
@@ -51,22 +51,22 @@ popups.forEach((popup) => {
   });
 });
 
-const formProfileFormValidator = new FormValidator(
+const formEditProfileValidator = new FormValidator(
   validationConfig,
-  profileForm
+  formEditProfile
 ); //создаем новый экземпляр класса на основе класса формвалидатор
-const formPopupAddValidator = new FormValidator(validationConfig, popupAdd); //создаем новый экземпляр класса на основе класса формвалидатор
-formProfileFormValidator.enableValidation(); //для формы вызываем публичный метод
-formPopupAddValidator.enableValidation(); // для формы вызываем публичный метод
+const formAddCardValidator = new FormValidator(validationConfig, popupAdd); //создаем новый экземпляр класса на основе класса формвалидатор
+formEditProfileValidator.enableValidation(); //для формы вызываем публичный метод
+formAddCardValidator.enableValidation(); // для формы вызываем публичный метод
 
 const openPopupProfile = () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  formProfileFormValidator.resetValidation();
+  forformEditProfileValidator.resetValidation();
   openPopup(popupProfile);
 };
 
-function handleProfileFormSubmit() {
+function handlformEditProfileSubmit() {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   closePopup(popupProfile);
@@ -79,15 +79,15 @@ function handleImageView(cardImage) {
   openPopup(popupPhotoView);
 }
 
-
 function createCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageView); //создаем новый экземпляр класса на основе класса кард
-  return card.generateCard();   //возвращаем сгенерированную карточку
+  return card.generateCard(); //возвращаем сгенерированную карточку
 }
 
 function renderCard(cardData) {
+  //функция вставляет карточку в разметку
   const cardElement = createCard(cardData);
-  cardsContainer.prepend(cardElement);   //реальную карточку помещаем в начало контейнера
+  cardsContainer.prepend(cardElement); //реальную карточку помещаем в начало контейнера
 }
 
 initialCards.forEach((cardData) => {
@@ -112,10 +112,10 @@ popupCloseButtons.forEach((button) => {
     closePopup(event.target.closest(".popup"))
   );
 });
-profileForm.addEventListener("submit", handleProfileFormSubmit);
-formPopupAdd.addEventListener("submit", handleSubmitPopupAdd);
+formEditProfile.addEventListener("submit", handlformEditProfileSubmit);
+formAddCard.addEventListener("submit", handleSubmitPopupAdd);
 btnOpenPopupAdd.addEventListener("click", () => {
-  formPopupAdd.reset();
-  formPopupAddValidator.resetValidation();
+  formAddCard.reset();
+  formAddCardValidator.resetValidation();
   openPopup(popupAdd);
 });
