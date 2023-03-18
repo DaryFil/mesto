@@ -1,6 +1,6 @@
 export class FormValidator {
-  constructor(data, _formSelector) {
-    this._formElement = _formSelector; //formElement
+  constructor(data, formElement) {
+    this._formElement = formElement; //formElement
     this._inputList = Array.from(
       this._formElement.querySelectorAll(data.inputSelector)
     );
