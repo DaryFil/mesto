@@ -62,7 +62,7 @@ formAddCardValidator.enableValidation(); // для формы вызываем �
 const openPopupProfile = () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  forformEditProfileValidator.resetValidation();
+  formEditProfileValidator.resetValidation();
   openPopup(popupProfile);
 };
 
