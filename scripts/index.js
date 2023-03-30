@@ -24,32 +24,32 @@ import {
   validationConfig,
 } from "./constants.js";
 
-const handleCloseEsc = (evt) => {
-  if (evt.key === "Escape") {
-    const currentPopup = document.querySelector(".popup_opened");
-    closePopup(currentPopup);
-  }
-};
+// const handleCloseEsc = (evt) => {
+//   if (evt.key === "Escape") {
+//     const currentPopup = document.querySelector(".popup_opened");
+//     closePopup(currentPopup);
+//   }
+// };
 
-const openPopup = (popup) => {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handleCloseEsc);
-};
+// const openPopup = (popup) => {
+//   popup.classList.add("popup_opened");
+//   document.addEventListener("keydown", handleCloseEsc);
+// };
 
-const closePopup = (popup) => {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleCloseEsc);
-};
+// const closePopup = (popup) => {
+//   popup.classList.remove("popup_opened");
+//   document.removeEventListener("keydown", handleCloseEsc);
+// };
 
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target === evt.currentTarget) {
-      closePopup(popup);
-    } else if (evt.target.classList.contains("popup__button-close")) {
-      closePopup(popup);
-    }
-  });
-});
+// popups.forEach((popup) => {
+//   popup.addEventListener("mousedown", (evt) => {
+//     if (evt.target === evt.currentTarget) {
+//       closePopup(popup);
+//     } else if (evt.target.classList.contains("popup__button-close")) {
+//       closePopup(popup);
+//     }
+//   });
+// });
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
