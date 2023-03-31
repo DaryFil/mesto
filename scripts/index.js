@@ -17,12 +17,13 @@ import {
   formAddCard,
   inputPlace,
   inputLink,
-  popupPhotoView,
+  popupPhotoViewSelector,
   popupImage,
   popupImageTitle,
   initialCards,
   validationConfig,
 } from "./constants.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 // const handleCloseEsc = (evt) => {
 //   if (evt.key === "Escape") {
@@ -72,12 +73,19 @@ function handlformEditProfileSubmit() {
   closePopup(popupProfile);
 }
 
-function handleImageView(cardImage) {
-  popupImage.src = cardImage.src;
-  popupImage.alt = cardImage.alt;
-  popupImageTitle.textContent = cardImage.alt;
-  openPopup(popupPhotoView);
+// function handleImageView(cardImage) {
+//   popupImage.src = cardImage.src;
+//   popupImage.alt = cardImage.alt;
+//   popupImageTitle.textContent = cardImage.alt;
+//   openPopup(popupPhotoView);
+// }
+const popupWithImage = new PopupWithImage(popupPhotoViewSelector);
+popupWithImage.setEventListeners();
+
+function handleCardClick(cardImage) {
+  popupWithImage.open(cardImage);
 }
+
 
 function createCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageView); //создаем новый экземпляр класса на основе класса кард
