@@ -21,7 +21,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popup.addEventListeners("mousedown", (evt) => {
+    this._popup.addEventListener("mousedown", (evt) => {
       if (evt.target === this._popup) {
         this.close();
       } else if (evt.target.classList.contains("popup__button-close")) {

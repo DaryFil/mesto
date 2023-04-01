@@ -1,7 +1,7 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import {
-  popupProfile,
+  popupProfileSelector,
   popups,
   profileOpenBtn,
   popupCloseButtons,
@@ -12,7 +12,7 @@ import {
   formEditProfile,
   cardTemplate,
   cardsContainer,
-  popupAdd,
+  popupAddSelector,
   btnOpenPopupAdd,
   formAddCard,
   inputPlace,
@@ -24,6 +24,7 @@ import {
   validationConfig,
 } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 // const handleCloseEsc = (evt) => {
 //   if (evt.key === "Escape") {
@@ -56,7 +57,9 @@ const formEditProfileValidator = new FormValidator(
   validationConfig,
   formEditProfile
 ); //создаем новый экземпляр класса на основе класса формвалидатор
-const formAddCardValidator = new FormValidator(validationConfig, popupAdd); //создаем новый экземпляр класса на основе класса формвалидатор
+const formAddCardValidator = new FormValidator(
+  validationConfig,
+  popupAddSelector); //создаем новый экземпляр класса на основе класса формвалидатор
 formEditProfileValidator.enableValidation(); //для формы вызываем публичный метод
 formAddCardValidator.enableValidation(); // для формы вызываем публичный метод
 
@@ -79,16 +82,22 @@ function handlformEditProfileSubmit() {
 //   popupImageTitle.textContent = cardImage.alt;
 //   openPopup(popupPhotoView);
 // }
-const popupWithImage = new PopupWithImage(popupPhotoViewSelector);
+const popupWithImage = new PopupWithImage(popupPhotoViewSelector); //создаем экземпляр класса попап-с-картинкой
 popupWithImage.setEventListeners();
+
+const popupProfileEdit = new PopupWithForm(popupProfileSelector,handlformEditProfileSubmit
+);
+popupProfileEdit.setEventListeners();
+
+const popupAddCard = new PopupWithForm(popupAddSelector, handleSubmitPopupAdd);
+popupAddCard.setEventListeners();
 
 function handleCardClick(cardImage) {
   popupWithImage.open(cardImage);
 }
 
-
 function createCard(cardData) {
-  const card = new Card(cardData, cardTemplate, handleImageView); //создаем новый экземпляр класса на основе класса кард
+  const card = new Card(cardData, cardTemplate, handleCardClick); //создаем новый экземпляр класса на основе класса кард
   return card.generateCard(); //возвращаем сгенерированную карточку
 }
 
