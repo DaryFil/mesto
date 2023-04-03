@@ -2,11 +2,7 @@ import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import {
   popupProfileSelector,
-  popups,
   profileOpenBtn,
-  popupCloseButtons,
-  profileName,
-  profileAbout,
   inputName,
   inputAbout,
   formEditProfile,
@@ -15,11 +11,7 @@ import {
   popupAddSelector,
   btnOpenPopupAdd,
   formAddCard,
-  inputPlace,
-  inputLink,
   popupPhotoViewSelector,
-  popupImage,
-  popupImageTitle,
   initialCards,
   validationConfig,
 } from "./constants.js";
@@ -32,6 +24,19 @@ const userInfo = new UserInfo({
   descriptionSelector: ".profile__about",
 });
 
+const openPopupProfile = () => {
+  const { name, description } = userInfo.getUserInfo();
+  inputName.value = name;
+  inputAbout.value = description;
+  formEditProfileValidator.resetValidation();
+  popupProfileEdit.open();
+};
+
+const handleFormEditProfileSubmit = (data) => {
+  userInfo.setUserInfo(data);
+  popupProfileEdit.close();
+};
+
 const formEditProfileValidator = new FormValidator(
   validationConfig,
   formEditProfile
@@ -40,25 +45,12 @@ const formAddCardValidator = new FormValidator(validationConfig, formAddCard); /
 formEditProfileValidator.enableValidation(); //для формы вызываем публичный метод
 formAddCardValidator.enableValidation(); // для формы вызываем публичный метод
 
-const openPopupProfile = () => {
-  const { name, description } = userInfo.getUserUnfo();
-  inputName.value = name;
-  inputAbout.value = description;
-  formEditProfileValidator.resetValidation();
-  popupProfileEdit.open();
-};
-
-const handlformEditProfileSubmit = (data) => {
-  userInfo.setUserInfo(data);
-  popupProfileEdit.close();
-};
-
 const popupWithImage = new PopupWithImage(popupPhotoViewSelector); //создаем экземпляр класса попап-с-картинкой
 popupWithImage.setEventListeners();
 
 const popupProfileEdit = new PopupWithForm(
   popupProfileSelector,
-  handlformEditProfileSubmit
+  handleFormEditProfileSubmit
 );
 popupProfileEdit.setEventListeners();
 
@@ -95,12 +87,6 @@ function handleSubmitPopupAdd(cardData) {
 }
 
 profileOpenBtn.addEventListener("click", openPopupProfile);
-
-popupCloseButtons.forEach((button) => {
-  button.addEventListener("click", (event) =>
-    closePopup(event.target.closest(".popup"))
-  );
-});
 
 btnOpenPopupAdd.addEventListener("click", () => {
   formAddCardValidator.resetValidation();
