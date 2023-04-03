@@ -1,5 +1,5 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+import { Card } from "../scripts/components/Card.js";
+import { FormValidator } from "../scripts/components/FormValidator.js";
 import {
   popupProfileSelector,
   profileOpenBtn,
@@ -14,10 +14,10 @@ import {
   popupPhotoViewSelector,
   initialCards,
   validationConfig,
-} from "./constants.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
+} from "../scripts/utils/constants.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
