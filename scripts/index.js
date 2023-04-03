@@ -57,9 +57,7 @@ const formEditProfileValidator = new FormValidator(
   validationConfig,
   formEditProfile
 ); //создаем новый экземпляр класса на основе класса формвалидатор
-const formAddCardValidator = new FormValidator(
-  validationConfig,
-  popupAddSelector); //создаем новый экземпляр класса на основе класса формвалидатор
+const formAddCardValidator = new FormValidator(validationConfig, formAddCard); //создаем новый экземпляр класса на основе класса формвалидатор
 formEditProfileValidator.enableValidation(); //для формы вызываем публичный метод
 formAddCardValidator.enableValidation(); // для формы вызываем публичный метод
 
@@ -85,7 +83,9 @@ function handlformEditProfileSubmit() {
 const popupWithImage = new PopupWithImage(popupPhotoViewSelector); //создаем экземпляр класса попап-с-картинкой
 popupWithImage.setEventListeners();
 
-const popupProfileEdit = new PopupWithForm(popupProfileSelector,handlformEditProfileSubmit
+const popupProfileEdit = new PopupWithForm(
+  popupProfileSelector,
+  handlformEditProfileSubmit
 );
 popupProfileEdit.setEventListeners();
 
@@ -112,14 +112,13 @@ initialCards.forEach((cardData) => {
   renderCard(cardData);
 });
 
-function handleSubmitPopupAdd(evt) {
-  const cardData = {
-    name: inputPlace.value,
-    link: inputLink.value,
-  };
+function handleSubmitPopupAdd(cardData) {
+  // const cardData = {
+  //   name: inputPlace.value,
+  //   link: inputLink.value,
+  // };
   renderCard(cardData);
-  closePopup(popupAdd);
-  evt.target.reset();
+  popupAddCard.close();
 }
 
 profileOpenBtn.addEventListener("click", openPopupProfile);
@@ -129,8 +128,7 @@ popupCloseButtons.forEach((button) => {
     closePopup(event.target.closest(".popup"))
   );
 });
-formEditProfile.addEventListener("submit", handlformEditProfileSubmit);
-formAddCard.addEventListener("submit", handleSubmitPopupAdd);
+
 btnOpenPopupAdd.addEventListener("click", () => {
   formAddCard.reset();
   formAddCardValidator.resetValidation();
