@@ -25,33 +25,12 @@ import {
 } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
-// const handleCloseEsc = (evt) => {
-//   if (evt.key === "Escape") {
-//     const currentPopup = document.querySelector(".popup_opened");
-//     closePopup(currentPopup);
-//   }
-// };
-
-// const openPopup = (popup) => {
-//   popup.classList.add("popup_opened");
-//   document.addEventListener("keydown", handleCloseEsc);
-// };
-
-// const closePopup = (popup) => {
-//   popup.classList.remove("popup_opened");
-//   document.removeEventListener("keydown", handleCloseEsc);
-// };
-
-// popups.forEach((popup) => {
-//   popup.addEventListener("mousedown", (evt) => {
-//     if (evt.target === evt.currentTarget) {
-//       closePopup(popup);
-//     } else if (evt.target.classList.contains("popup__button-close")) {
-//       closePopup(popup);
-//     }
-//   });
-// });
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  descriptionSelector: ".profile__about",
+});
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
@@ -62,24 +41,18 @@ formEditProfileValidator.enableValidation(); //для формы вызывае�
 formAddCardValidator.enableValidation(); // для формы вызываем публичный метод
 
 const openPopupProfile = () => {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
+  const { name, description } = userInfo.getUserUnfo();
+  inputName.value = name;
+  inputAbout.value = description;
   formEditProfileValidator.resetValidation();
-  openPopup(popupProfile);
+  popupProfileEdit.open();
 };
 
-function handlformEditProfileSubmit() {
-  profileName.textContent = inputName.value;
-  profileAbout.textContent = inputAbout.value;
-  closePopup(popupProfile);
-}
+const handlformEditProfileSubmit = (data) => {
+  userInfo.setUserInfo(data);
+  popupProfileEdit.close();
+};
 
-// function handleImageView(cardImage) {
-//   popupImage.src = cardImage.src;
-//   popupImage.alt = cardImage.alt;
-//   popupImageTitle.textContent = cardImage.alt;
-//   openPopup(popupPhotoView);
-// }
 const popupWithImage = new PopupWithImage(popupPhotoViewSelector); //создаем экземпляр класса попап-с-картинкой
 popupWithImage.setEventListeners();
 
@@ -130,7 +103,6 @@ popupCloseButtons.forEach((button) => {
 });
 
 btnOpenPopupAdd.addEventListener("click", () => {
-  formAddCard.reset();
   formAddCardValidator.resetValidation();
-  openPopup(popupAdd);
+  popupAddCard.open();
 });
