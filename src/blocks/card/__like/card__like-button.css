@@ -1,4 +1,4 @@
-.card__like {
+.card__like-button {
   transition: 0.3s;
   cursor: pointer;
   padding: 0;
@@ -11,6 +11,6 @@
   height: 19px;
   width: 22px;
 }
-.card__like:hover {
+.card__like-button:hover {
   opacity: 0.5;
 }

@@ -42,7 +42,10 @@
               <button class="card__delete-button opacity"></button>
               <div class="card__description">
                 <h2 class="card__title"></h2>
-                <button type="button" class="card__like"></button>
+                <div class="card__like">
+                  <button type="button" class="card__like-button"></button>
+                  <span class="card__like-count">0</span>
+                </div>
               </div>
             </article>
           </template>
@@ -52,6 +55,7 @@
         <p class="footer__copyright">© 2023 Mesto Russia</p>
       </footer>
 
+      <!-- попап для редактирования данных профиля -->
       <div class="popup popup_profile">
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
@@ -77,12 +81,12 @@
                 type="text"
                 placeholder="Специальность"
                 class="popup__input popup__input_about"
-                name="description"
+                name="about"
                 required
                 minlength="2"
                 maxlength="200"
               />
-              <span class="popup__input-error description-error"></span>
+              <span class="popup__input-error about-error"></span>
             </label>
             <button type="submit" class="popup__button-save opacity">
               Сохранить
@@ -95,6 +99,7 @@
         </div>
       </div>
 
+      <!-- попап для добавления новой карточки -->
       <div class="popup popup_add-card">
         <div class="popup__container">
           <h2 class="popup__title">Новое место</h2>
@@ -136,6 +141,25 @@
         </div>
       </div>
 
+      <!-- попап удаления карточки -->
+      <div class="popup popup_delete-card">
+        <div class="popup__container">
+          <h2 class="popup__title">Вы уверены?</h2>
+          <form
+            class="popup__form popup_delete-card"
+            name="delete-card"
+            novalidate
+          >
+            <button type="submit" class="popup__button-save opacity">Да</button>
+          </form>
+          <button
+            type="button"
+            class="popup__button-close popup__button-close_profile opacity"
+          ></button>
+        </div>
+      </div>
+
+      <!-- попап для просмотра картинки во весь экран -->
       <div class="popup popup_photo-view">
         <div class="popup__content">
           <button

@@ -41,4 +41,11 @@ export const popupProfileSelector = ".popup_profile",
     inactiveButtonClass: "popup__button-save_disabled",
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__input-error_visible",
+  },
+  settings = {
+    baseUrl: "https://mesto.nomoreparties.co/v1/cohort-64",
+    headers: {
+      authorization: "a54ec7ef-da76-40d6-af95-163ba9adf077",
+      "Content-Type": "application/json",
+    },
   };
