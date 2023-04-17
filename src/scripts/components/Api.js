@@ -19,6 +19,14 @@ export default class Api {
     }).then((res) => res.json());
   }
 
+  saveUserAvatar({ avatar }) {
+    return fetch(`${this._address}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ avatar: avatar }),
+    }).then((res) => res.json());
+  }
+  
   getInitialCards() {
     return fetch(`${this._address}/cards`, {
       method: "GET",

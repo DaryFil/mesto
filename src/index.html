@@ -8,20 +8,13 @@
   <body class="body">
     <div class="page">
       <header class="header">
-        <img
-          src="<%=require('./images/logo.svg')%>"
-          alt="Логотип место"
-          class="header__logo"
-        />
+        <img alt="Логотип место" src="<%=require('./images/logo.svg')%>" class="header__logo" />
       </header>
       <main class="content">
         <section class="profile">
           <div class="profile__avatar-container">
-            <img
-              src="<%=require('./images/vasiliska.jpg')%>"
-              alt="фото кошки"
-              class="profile__avatar"
-            />
+            <img alt="фото кошки" class="profile__avatar" />
+            <div class="profile__avatar-save"></div>
           </div>
           <div class="profile__info">
             <div class="profile__title">
@@ -141,21 +134,45 @@
         </div>
       </div>
 
-      <!-- попап удаления карточки -->
+      <!-- попап для удаления карточки -->
       <div class="popup popup_delete-card">
         <div class="popup__container">
           <h2 class="popup__title">Вы уверены?</h2>
           <form
-            class="popup__form popup_delete-card"
+            class="popup__form popup__profile-form popup_delete-card"
             name="delete-card"
             novalidate
           >
             <button type="submit" class="popup__button-save opacity">Да</button>
           </form>
-          <button
-            type="button"
-            class="popup__button-close popup__button-close_profile opacity"
-          ></button>
+          <button type="button" class="popup__button-close opacity"></button>
+        </div>
+      </div>
+
+      <!--  попап для редактирования аватара-->
+      <div class="popup popup_save-avatar">
+        <div class="popup__container">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form
+            class="popup__form popup__profile-form popup__form_avatar"
+            name="save-avatar"
+            novalidate
+          >
+            <label class="popup__field">
+              <input
+                type="url"
+                placeholder="Ccылка на картинку"
+                class="popup__input popup__input_avatar"
+                name="avatar"
+                required
+              />
+              <span class="popup__input-error avatar-error"></span>
+            </label>
+            <button type="submit" class="popup__button-save opacity">
+              Сохранить
+            </button>
+          </form>
+          <button type="button" class="popup__button-close opacity"></button>
         </div>
       </div>
 

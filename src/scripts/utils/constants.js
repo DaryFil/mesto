@@ -1,5 +1,6 @@
 export const popupProfileSelector = ".popup_profile",
   profileOpenBtn = document.querySelector(".profile__edit-button"),
+  profileAvatarSave = document.querySelector(".profile__avatar-save"),
   inputName = document.querySelector(".popup__input_name"),
   inputAbout = document.querySelector(".popup__input_about"),
   formEditProfile = document.querySelector(".popup__profile-form"),
@@ -7,8 +8,10 @@ export const popupProfileSelector = ".popup_profile",
   cardsContainer = document.querySelector(".elements"),
   btnOpenPopupAdd = document.querySelector(".profile__add-button"),
   formAddCard = document.querySelector(".popup__profile-form_card"),
+  formSaveAvatar = document.querySelector(".popup__form_avatar"),
   popupPhotoViewSelector = ".popup_photo-view",
   popupAddSelector = ".popup_add-card",
+  popupSaveAvatarSelector = ".popup_save-avatar",
   initialCards = [
     {
       name: "Архипо-Осиповка",

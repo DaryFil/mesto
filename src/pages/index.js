@@ -10,11 +10,14 @@ import {
   cardTemplate,
   cardsContainer,
   popupAddSelector,
+  popupSaveAvatarSelector,
   btnOpenPopupAdd,
   formAddCard,
+  formSaveAvatar,
   popupPhotoViewSelector,
   validationConfig,
   settings,
+  profileAvatarSave,
 } from "../scripts/utils/constants.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
@@ -26,29 +29,22 @@ import Api from "../scripts/components/Api.js";
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   descriptionSelector: ".profile__about",
+  avatarSelector: ".profile__avatar",
 });
 
 const api = new Api(settings);
 
 Promise.all([
-  api.getUserInfo(), //для одновременного получения данных пользователя и карточек с сервера
+  //для одновременного получения данных пользователя и карточек с сервера
+  api.getUserInfo(),
   api.getInitialCards(),
 ])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
-
+    userInfo.setUserAvatar(userData);
     cardsSection.renderItems(cards.reverse());
   })
   .catch((error) => console.log(`Ошибка: ${error}`));
-
-// api.getUserInfo() получаем данные пользователя
-// .then((res) => userInfo.setUserInfo(res))
-// .catch((error) => console.log(`Ошибка: ${error}`));
-
-// api.getInitialCards() получаем данные карточек
-// .then(res => {
-//   cardsSection.renderItems(res.reverse());
-// })
 
 const openPopupProfile = () => {
   const { name, about } = userInfo.getUserInfo();
@@ -69,6 +65,16 @@ const handleFormEditProfileSubmit = (data) => {
     })
     .catch((error) => console.log(`Ошибка: ${error}`));
 };
+// редактирование аватара
+const handleSaveAvatar = (data) => {
+  api
+    .saveUserAvatar(data)
+    .then((res) => {
+      userInfo.setUserAvatar(res);
+      popupSaveAvatar.close();
+    })
+    .catch((error) => console.log(`Ошибка: ${error}`));
+};
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
@@ -77,6 +83,12 @@ const formEditProfileValidator = new FormValidator(
 const formAddCardValidator = new FormValidator(validationConfig, formAddCard); //создаем новый экземпляр класса на основе класса формвалидатор
 formEditProfileValidator.enableValidation(); //для формы вызываем публичный метод
 formAddCardValidator.enableValidation(); // для формы вызываем публичный метод
+
+const formSaveAvatarValidator = new FormValidator(
+  validationConfig,
+  formSaveAvatar
+);
+formSaveAvatarValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupPhotoViewSelector); //создаем экземпляр класса попап-с-картинкой
 popupWithImage.setEventListeners();
@@ -90,17 +102,24 @@ popupProfileEdit.setEventListeners();
 const popupAddCard = new PopupWithForm(popupAddSelector, handleSubmitPopupAdd);
 popupAddCard.setEventListeners();
 
+const popupSaveAvatar = new PopupWithForm(
+  popupSaveAvatarSelector,
+  handleSaveAvatar
+);
+popupSaveAvatar.setEventListeners();
 
-const popupConfirmDelete = new PopupWithConfirm('.popup_delete-card', handleSubmitPopupConfirm);
+const popupConfirmDelete = new PopupWithConfirm(
+  ".popup_delete-card",
+  handleSubmitPopupConfirm
+);
 popupConfirmDelete.setEventListeners();
-function handleSubmitPopupConfirm(cardId, card)  {
-  api.deleteCard(cardId)
-  .then(() => {
+
+function handleSubmitPopupConfirm(cardId, card) {
+  api.deleteCard(cardId).then(() => {
     card.deleteCard();
     popupConfirmDelete.close();
-  })
+  });
 }
-
 
 function handleCardClick(cardImage) {
   popupWithImage.open(cardImage);
@@ -125,6 +144,9 @@ const cardsSection = new Section(
   ".elements"
 );
 
+
+
+
 // function renderCard(cardData) {
 //   //функция вставляет карточку в разметку
 //   const cardElement = createCard(cardData);
@@ -145,16 +167,14 @@ function handleSubmitPopupAdd(cardData) {
       popupAddCard.close();
     })
     .catch((error) => console.log(`Ошибка: ${error}`));
-
-  // const cardData = {
-  //   name: inputPlace.value,
-  //   link: inputLink.value,
-  // };
-  //   renderCard(cardData);
-  //   popupAddCard.close();
 }
 
 profileOpenBtn.addEventListener("click", openPopupProfile);
+
+profileAvatarSave.addEventListener("click", () => {
+  formSaveAvatarValidator.resetValidation();
+  popupSaveAvatar.open();
+})
 
 btnOpenPopupAdd.addEventListener("click", () => {
   formAddCardValidator.resetValidation();

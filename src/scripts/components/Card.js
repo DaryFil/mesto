@@ -3,6 +3,7 @@ export class Card {
     data,
     templateSelector,
     handleCardClick,
+
     handleOpenConfirm,
     userId
   ) {
