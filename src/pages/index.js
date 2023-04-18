@@ -34,6 +34,8 @@ const userInfo = new UserInfo({
 
 const api = new Api(settings);
 
+const cards = {};
+
 Promise.all([
   //для одновременного получения данных пользователя и карточек с сервера
   api.getUserInfo(),
@@ -56,7 +58,7 @@ const openPopupProfile = () => {
 
 //обработчик редактирования профиля//
 const handleFormEditProfileSubmit = (data) => {
-  popupProfileEdit.blockButton("Сохранение...");
+ popupProfileEdit.blockButton('Сохранение...');
   api
     .saveUserInfo(data) //отправляем данные пользователя на сервер
     .then((res) => {
@@ -65,12 +67,11 @@ const handleFormEditProfileSubmit = (data) => {
       popupProfileEdit.close(); //закрываем попап
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() => popupProfileEdit.blockButton("Сохранить", false));
+    .finally(() =>  popupProfileEdit.blockButton('Сохранить', false));
 };
 // редактирование аватара//
-const handleSaveAvatar = (data) => {
-  //отправляем аватар на сервер
-  popupSaveAvatar.blockButton("Сохранение...");
+const handleSaveAvatar = (data) => { //отправляем аватар на сервер
+  popupSaveAvatar.blockButton('Сохранение...');
   api
     .saveUserAvatar(data)
     .then((res) => {
@@ -78,7 +79,7 @@ const handleSaveAvatar = (data) => {
       popupSaveAvatar.close();
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() => popupSaveAvatar.blockButton("Сохранить", false));
+    .finally(() => popupSaveAvatar.blockButton('Сохранить', false));
 };
 
 const formEditProfileValidator = new FormValidator(
@@ -120,32 +121,31 @@ const popupConfirmDelete = new PopupWithConfirm(
 popupConfirmDelete.setEventListeners();
 
 function handleSubmitPopupConfirm(cardId, card) {
-  popupConfirmDelete.blockButton("Удаление...");
-  api
-    .deleteCard(cardId)
-    .then(() => {
-      card.deleteCard();
-      popupConfirmDelete.close();
-    })
+  popupConfirmDelete.blockButton('Удаление...');
+  api.deleteCard(cardId)
+  .then(() => {
+    card.deleteCard();
+    popupConfirmDelete.close()})
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() => popupConfirmDelete.blockButton("Да", false));
+    .finally(() => popupConfirmDelete.blockButton('Да', false));
 }
 
 function handleCardClick(cardImage) {
   popupWithImage.open(cardImage);
 }
 const handleLikeClick = (id) => {
-  if (card.isLiked()) {
-    api._removeLike(id).then((res) => {
-      card.setLikes(res.likes);
-    });
-  } else {
-    api._addLike(id).then((res) => {
-      card.setLikes(res.likes);
-    });
-  }
-  
-};
+  if(cards[id].isLiked()) {
+    api._removeLike(id)
+    .then(res => {
+      cards[id].setLikes(res.likes)
+  })
+} else {
+  api._addLike(id)
+  .then(res => {
+    cards[id].setLikes(res.likes)
+})
+ }
+}
 
 function createCard(cardData) {
   const card = new Card(
@@ -156,6 +156,7 @@ function createCard(cardData) {
     (cardId) => popupConfirmDelete.open(cardId, card),
     userInfo.getUserId()
   ); //создаем новый экземпляр класса на основе класса кард
+  cards[cardData._id] = card;
   return card.generateCard(); //возвращаем сгенерированную карточку
 }
 const cardsSection = new Section(
@@ -166,6 +167,9 @@ const cardsSection = new Section(
   },
   ".elements"
 );
+
+
+
 
 // function renderCard(cardData) {
 //   //функция вставляет карточку в разметку
@@ -180,7 +184,7 @@ const cardsSection = new Section(
 
 function handleSubmitPopupAdd(cardData) {
   //добавление карточки
-  popupAddCard.blockButton("Создание...");
+  popupAddCard.blockButton('Создание...');
   api
     .addNewCard(cardData)
     .then((res) => {
@@ -188,7 +192,7 @@ function handleSubmitPopupAdd(cardData) {
       popupAddCard.close();
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() => popupAddCard.blockButton("Сохранить", false));
+    .finally(() => popupAddCard.blockButton('Сохранить', false));
 }
 
 profileOpenBtn.addEventListener("click", openPopupProfile);
@@ -196,7 +200,7 @@ profileOpenBtn.addEventListener("click", openPopupProfile);
 profileAvatarSave.addEventListener("click", () => {
   formSaveAvatarValidator.resetValidation();
   popupSaveAvatar.open();
-});
+})
 
 btnOpenPopupAdd.addEventListener("click", () => {
   formAddCardValidator.resetValidation();
