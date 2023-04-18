@@ -58,7 +58,7 @@ const openPopupProfile = () => {
 
 //обработчик редактирования профиля//
 const handleFormEditProfileSubmit = (data) => {
- popupProfileEdit.blockButton('Сохранение...');
+  popupProfileEdit.blockButton("Сохранение...");
   api
     .saveUserInfo(data) //отправляем данные пользователя на сервер
     .then((res) => {
@@ -67,11 +67,12 @@ const handleFormEditProfileSubmit = (data) => {
       popupProfileEdit.close(); //закрываем попап
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() =>  popupProfileEdit.blockButton('Сохранить', false));
+    .finally(() => popupProfileEdit.blockButton("Сохранить", false));
 };
 // редактирование аватара//
-const handleSaveAvatar = (data) => { //отправляем аватар на сервер
-  popupSaveAvatar.blockButton('Сохранение...');
+const handleSaveAvatar = (data) => {
+  //отправляем аватар на сервер
+  popupSaveAvatar.blockButton("Сохранение...");
   api
     .saveUserAvatar(data)
     .then((res) => {
@@ -79,7 +80,7 @@ const handleSaveAvatar = (data) => { //отправляем аватар на с
       popupSaveAvatar.close();
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() => popupSaveAvatar.blockButton('Сохранить', false));
+    .finally(() => popupSaveAvatar.blockButton("Сохранить", false));
 };
 
 const formEditProfileValidator = new FormValidator(
@@ -121,13 +122,15 @@ const popupConfirmDelete = new PopupWithConfirm(
 popupConfirmDelete.setEventListeners();
 
 function handleSubmitPopupConfirm(cardId, card) {
-  popupConfirmDelete.blockButton('Удаление...');
-  api.deleteCard(cardId)
-  .then(() => {
-    card.deleteCard();
-    popupConfirmDelete.close()})
+  popupConfirmDelete.blockButton("Удаление...");
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      card.deleteCard();
+      popupConfirmDelete.close();
+    })
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() => popupConfirmDelete.blockButton('Да', false));
+    .finally(() => popupConfirmDelete.blockButton("Да", false));
 }
 
 function handleCardClick(cardImage) {
@@ -166,23 +169,9 @@ const cardsSection = new Section(
   ".elements"
 );
 
-
-
-
-// function renderCard(cardData) {
-//   //функция вставляет карточку в разметку
-//   const cardElement = createCard(cardData);
-//   cardsContainer.prepend(cardElement); //реальную карточку помещаем в начало контейнера
-// }
-
-// initialCards.forEach((cardData) => {
-//   //для каждого объекта массива функцией rendercard создаем карточку и перемещаем ее в начало контейнера с карточками
-//   renderCard(cardData);
-// });
-
 function handleSubmitPopupAdd(cardData) {
   //добавление карточки
-  popupAddCard.blockButton('Создание...');
+  popupAddCard.blockButton("Создание...");
   api
     .addNewCard(cardData)
     .then((res) => {
@@ -190,7 +179,7 @@ function handleSubmitPopupAdd(cardData) {
       popupAddCard.close();
     })
     .catch((error) => console.log(`Ошибка: ${error}`))
-    .finally(() => popupAddCard.blockButton('Сохранить', false));
+    .finally(() => popupAddCard.blockButton("Создать", false));
 }
 
 profileOpenBtn.addEventListener("click", openPopupProfile);
@@ -198,7 +187,7 @@ profileOpenBtn.addEventListener("click", openPopupProfile);
 profileAvatarSave.addEventListener("click", () => {
   formSaveAvatarValidator.resetValidation();
   popupSaveAvatar.open();
-})
+});
 
 btnOpenPopupAdd.addEventListener("click", () => {
   formAddCardValidator.resetValidation();
