@@ -116,7 +116,7 @@ const popupSaveAvatar = new PopupWithForm(
 popupSaveAvatar.setEventListeners();
 
 const popupConfirmDelete = new PopupWithConfirm(
-  ".popup_delete-card",
+  ".popup__delete-card",
   handleSubmitPopupConfirm
 );
 popupConfirmDelete.setEventListeners();
