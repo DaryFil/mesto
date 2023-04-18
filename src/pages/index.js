@@ -133,19 +133,17 @@ function handleSubmitPopupConfirm(cardId, card) {
 function handleCardClick(cardImage) {
   popupWithImage.open(cardImage);
 }
-const handleLikeClick = (id) => {
-  if(cards[id].isLiked()) {
-    api._removeLike(id)
-    .then(res => {
-      cards[id].setLikes(res.likes)
-  })
-} else {
-  api._addLike(id)
-  .then(res => {
-    cards[id].setLikes(res.likes)
-})
- }
-}
+const handleLikeClick = (id, isLiked) => {
+  if (isLiked) {
+    api._removeLike(id).then((res) => {
+      cards[id].setLikes(res.likes);
+    });
+  } else {
+    api._addLike(id).then((res) => {
+      cards[id].setLikes(res.likes);
+    });
+  }
+};
 
 function createCard(cardData) {
   const card = new Card(

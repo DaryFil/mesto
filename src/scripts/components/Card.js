@@ -17,15 +17,12 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
     this._handleOpenConfirm = handleOpenConfirm;
+    this._isLiked = this.isLiked();
   }
 
   _getTemplate() {
     return this._templateSelector.querySelector(".card").cloneNode(true);
   }
-
-  // _toggleLike = () => {
-  //   this._cardLikebtn.classList.toggle("card__like-button_active");
-  // };
 
   _toggleLikeButton(isLiked) {
     if (isLiked) {
@@ -43,19 +40,22 @@ export class Card {
     this._handleOpenConfirm(this._cardId);
   }
 
-  setLikes(newLikes) {
-    this._likeCounter = newLikes.length;
-    this._likes = newLikes;
-    this._toggleLikeButton();
+  isLiked() {
+    return this._likes.find((item) => item._id === this._userId)
   }
 
-  isLiked() {
-    return this._likes.find((item) => item === this._userId);
+  setLikes(newLikes) {
+    if(newLikes) {
+      this._likes = newLikes;
+      this._isLiked = this.isLiked();
+    }
+    this._likeCounter.textContent = this._likes.length;
+    this._toggleLikeButton(this.isLiked());
   }
 
   _setEventListeners = () => {
     this._cardLikebtn.addEventListener("click", () => {
-      this._handleLikeClick();
+      this._handleLikeClick(this._cardId, this._isLiked);
     });
     this._cardDeletebtn.addEventListener("click", () => {
       this._handleClickDeleteBtn();
@@ -76,10 +76,7 @@ export class Card {
     this._cardTitle.textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-    this._likeCounter.textContent = this._likes.length;
-    if (this._likes.find((item) => item === this._userId)) {
-      this._like._toggleLikeButton();
-    }
+    this.setLikes();
     if (this._ownerId !== this._userId) {
       //если id не наш-убираем корзинку
       this._cardDeletebtn.remove();
