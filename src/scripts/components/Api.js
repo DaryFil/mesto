@@ -26,7 +26,7 @@ export default class Api {
       body: JSON.stringify({ avatar: avatar }),
     }).then((res) => res.json());
   }
-  
+
   getInitialCards() {
     return fetch(`${this._address}/cards`, {
       method: "GET",
@@ -44,6 +44,20 @@ export default class Api {
 
   deleteCard(cardId) {
     return fetch(`${this._address}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => res.json());
+  }
+
+  _addLike(cardId) {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => res.json());
+  }
+
+  _removeLike(cardId) {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => res.json());
