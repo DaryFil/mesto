@@ -70,7 +70,8 @@ const handleFormEditProfileSubmit = (data) => {
     .finally(() => popupProfileEdit.blockButton("Сохранить", false));
 };
 // редактирование аватара//
-const handleSaveAvatar = (data) => {   //отправляем аватар на сервер
+const handleSaveAvatar = (data) => {
+  //отправляем аватар на сервер
   popupSaveAvatar.blockButton("Сохранение...");
   api
     .saveUserAvatar(data)
@@ -136,61 +137,32 @@ function handleSubmitPopupConfirm(cardId, card) {
     .finally(() => popupConfirmDelete.blockButton("Да", false));
 }
 
-
-// const handleLikeClick = (id, isLiked) => {
-//   if (isLiked) {
-//     api.removeLike(id).then((res) => {
-//       cards[id].setLikes(res.likes);
-//     });
-//   } else {
-//     api.addLike(id).then((res) => {
-//       cards[id].setLikes(res.likes);
-//     });
-//   }
-// };
-
-
-
-
-function addLike(cardId) {
-  return api.addLike(cardId)
-      .then((result) => {
-          return result
-      })
-      .catch((err) => {
-          console.log(err);
-      })
-}
-
-function removeLike(cardId) {
-  return api.removeLike(cardId)
-      .then((res) => {
-          return res
-      })
-      .catch((err) => {
-          console.log(err);
-      })
-}
-
-
-
-
+const handleLikeClick = (id, isLiked, card) => {
+  if (isLiked) {
+    api.removeLike(id).then((res) => {
+      card.handleToggleLike(res.likes);
+    });
+  } else {
+    api.addLike(id).then((res) => {
+      card.handleToggleLike(res.likes);
+    });
+  }
+};
 
 function createCard(cardData) {
   const card = new Card(
     cardData,
     cardTemplate,
     handleCardClick,
-    // handleLikeClick,
-
-    addLike, removeLike,
+    (cardId, isLiked) => handleLikeClick(cardId, isLiked, card),
 
     (cardId) => popupConfirmDelete.open(cardId, card),
     userInfo.getUserId()
   ); //создаем новый экземпляр класса на основе класса кард
-  // cards[cardData._id] = card;
+
   return card.generateCard(); //возвращаем сгенерированную карточку
 }
+
 const cardsSection = new Section(
   {
     renderer: (item) => {
