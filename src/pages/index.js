@@ -34,7 +34,7 @@ const userInfo = new UserInfo({
 
 const api = new Api(settings);
 
-const cards = {};
+// const cards = {};
 
 Promise.all([
   //для одновременного получения данных пользователя и карточек с сервера
@@ -70,8 +70,7 @@ const handleFormEditProfileSubmit = (data) => {
     .finally(() => popupProfileEdit.blockButton("Сохранить", false));
 };
 // редактирование аватара//
-const handleSaveAvatar = (data) => {
-  //отправляем аватар на сервер
+const handleSaveAvatar = (data) => {   //отправляем аватар на сервер
   popupSaveAvatar.blockButton("Сохранение...");
   api
     .saveUserAvatar(data)
@@ -121,6 +120,10 @@ const popupConfirmDelete = new PopupWithConfirm(
 );
 popupConfirmDelete.setEventListeners();
 
+function handleCardClick(cardImage) {
+  popupWithImage.open(cardImage);
+}
+
 function handleSubmitPopupConfirm(cardId, card) {
   popupConfirmDelete.blockButton("Удаление...");
   api
@@ -133,31 +136,59 @@ function handleSubmitPopupConfirm(cardId, card) {
     .finally(() => popupConfirmDelete.blockButton("Да", false));
 }
 
-function handleCardClick(cardImage) {
-  popupWithImage.open(cardImage);
+
+// const handleLikeClick = (id, isLiked) => {
+//   if (isLiked) {
+//     api.removeLike(id).then((res) => {
+//       cards[id].setLikes(res.likes);
+//     });
+//   } else {
+//     api.addLike(id).then((res) => {
+//       cards[id].setLikes(res.likes);
+//     });
+//   }
+// };
+
+
+
+
+function addLike(cardId) {
+  return api.addLike(cardId)
+      .then((result) => {
+          return result
+      })
+      .catch((err) => {
+          console.log(err);
+      })
 }
-const handleLikeClick = (id, isLiked) => {
-  if (isLiked) {
-    api.removeLike(id).then((res) => {
-      cards[id].setLikes(res.likes);
-    });
-  } else {
-    api.addLike(id).then((res) => {
-      cards[id].setLikes(res.likes);
-    });
-  }
-};
+
+function removeLike(cardId) {
+  return api.removeLike(cardId)
+      .then((res) => {
+          return res
+      })
+      .catch((err) => {
+          console.log(err);
+      })
+}
+
+
+
+
 
 function createCard(cardData) {
   const card = new Card(
     cardData,
     cardTemplate,
     handleCardClick,
-    handleLikeClick,
+    // handleLikeClick,
+
+    addLike, removeLike,
+
     (cardId) => popupConfirmDelete.open(cardId, card),
     userInfo.getUserId()
   ); //создаем новый экземпляр класса на основе класса кард
-  cards[cardData._id] = card;
+  // cards[cardData._id] = card;
   return card.generateCard(); //возвращаем сгенерированную карточку
 }
 const cardsSection = new Section(
